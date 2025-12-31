@@ -61,7 +61,7 @@ jobs:
     steps:
       - name: Detect Architecture
         run: | 
-          ARCH=$(uname -m)"
+          ARCH="$(uname -m)"
           echo "ARCH=$ARCH" >> $GITHUB_ENV
           if [ "$ARCH" = "arm64" ]; then
             echo "Running on Apple Silicon"
