@@ -54,11 +54,21 @@ concurrency:
 jobs:
   build:
     name: Build YTLitePlus
-    runs-on: macos-13
+    runs-on: macos-15
     permissions:
       contents: write
 
     steps:
+      - name: Detect Architecture
+        run: | 
+          ARCH=$(uname -m)"
+          echo "ARCH=$ARCH" >> $GITHUB_ENV
+          if [ "$ARCH" = "arm64" ]; then
+            echo "Running on Apple Silicon"
+          else
+            echo "Running on Intel $ARCH"
+          fi
+
       - name: Checkout Main
         uses: actions/checkout@v4
         with:
